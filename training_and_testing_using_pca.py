@@ -9,15 +9,14 @@ import pylab
 timer=time.time()
 
 
-no_of_people=3
+no_of_people=20
 total_no_of_photos=10
 Xtest=0.5
 no_of_tests=int(Xtest*total_no_of_photos)
-
 ##need size to initialize input image matrix################################################
 img=scipy.misc.imread("/media/shubham/Work/Projects/FaceRec/att_faces/s1/1.pgm")
 size=img.shape
-
+#size=(216,216)
 ##################k*n*n initial image matrix###################################################
 input_image_matrix=numpy.zeros(shape=((no_of_tests*no_of_people),size[0]*size[1]),dtype=numpy.float32)
 
@@ -99,6 +98,8 @@ Weights=Weights.transpose()
 ################################################################################################
 
 #####################Classifying the given image into one of the test sets######################
+acc_cnt=0
+total_cnt=0
 for pp in range(1,no_of_people+1):
     for tt in range(no_of_tests+1,total_no_of_photos+1):
         read_img=scipy.misc.imread("/media/shubham/Work/Projects/FaceRec/att_faces/s"+str(pp)+"/"+str(tt)+".pgm")
@@ -122,3 +123,8 @@ for pp in range(1,no_of_people+1):
         print("image location = "+"/media/shubham/Work/Projects/FaceRec/att_faces/s"+str(pp)+"/"+str(tt)+".pgm")
         print 'PREDICTED CANDIDATE NUMBER = ',closest_face_id/no_of_tests+1
         print 'RESULT = ',str((closest_face_id/no_of_tests+1)==pp)
+        if (closest_face_id/no_of_tests+1)==pp:
+            acc_cnt+=1
+        total_cnt+=1
+accuracy_score=acc_cnt/float(total_cnt)*100
+print 'Accuracy Score = ',accuracy_score
