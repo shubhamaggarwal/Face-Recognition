@@ -9,10 +9,10 @@ import pylab
 timer=time.time()
 
 
-no_of_people=20
+no_of_people=40
 total_no_of_photos=10
-Xtest=0.5
-no_of_tests=int(Xtest*total_no_of_photos)
+Xtrain=0.7
+no_of_tests=int(Xtrain*total_no_of_photos)
 ##need size to initialize input image matrix################################################
 img=scipy.misc.imread("/media/shubham/Work/Projects/FaceRec/att_faces/s1/1.pgm")
 size=img.shape
@@ -85,7 +85,7 @@ for i in range(EV_in_original_dimensions.shape[0]):
         for k in range(size[1]):
             eigen_image[j][k]=EV_in_original_dimensions[i][pixel]
             pixel+=1
-    figure1.add_subplot(4,EV_in_original_dimensions.shape[0]/4+1,t+1)
+    figure1.add_subplot(EV_in_original_dimensions.shape[0]/4+1,4,t+1)
     t+=1
     pylab.imshow(eigen_image)
 pylab.show()
